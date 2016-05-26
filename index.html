@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Leaflet Map Template</title>
@@ -48,11 +48,223 @@
             zIndex: 1,
         }).addTo(map);
 
+        
+        
+        map.on('click', function(e) {
+        
+            alert(map.getZoom())
+        
+        
+        })
 
 
 
+        
+        
+        
+                var dataObj = {
+                    x:location.lat,
+                    y:location.lon,
+                    zoom:map.getZoom(),
+                    actLayers:activeLayers
+                }
 
-      
+
+                $.ajax({
+                    url: '/kadastrova-karta/getobjectinfo',
+                    type: 'POST',
+                    dataType : "json",
+                    data: dataObj,
+                    success: function (data) {
+                        if (popup) {
+                            popup.destroy();
+                            popup = false;
+                        }
+                       // console.log(data);
+                        var x = event.xy.x;
+                        var y = event.xy.y;
+
+                        if (data.pusto) {
+                            $('.map').css('cursor', 'default');
+                            statusAjax = true;
+                            alert('Р”Р°РЅРЅС– РІС–РґСЃСѓС‚РЅС–');
+                        } else {
+                            if(data.error){
+                                alert(data.error);
+                            }
+                            // РџСЂРё РєР°Р¶РґРѕРј РєР»РёРєРµ РїСЂСЏС‡РµРј РІСЃРµ РµР»РµРјРµРЅС‚С‹ РєРѕС‚РѕСЂС‹Рµ РјРё РІРёРґРµР»Рё РїСЂРё РїСЂРµРґС‹РґСѓС‰РµРј РѕС‚РѕР±СЂР°Р¶РµРЅРёРё
+                            $('#a_dilanka, #a_ikk, #a_atu, #a_rajonunion, #a_obl, #a_grunt, #a_land_disposal, #a_dilanka_arch, #page_1, #page_2, #page_3, #page_4, #page_5, #page_6, #page_7, #page_8').hide();
+
+                            // РЈРґР°Р»СЏРµРј РІСЃРµ РЅР°СЃС‚СЂРѕР№РєРё РєР»Р°СЃРѕРІ РїСЂРё РєР°Р¶РґРѕРј РєР»РёРєРµ
+                            $("#a_dilanka, #a_ikk, #a_atu, #a_rajonunion, #a_obl, #a_grunt, #a_land_disposal, #a_dilanka_arch").removeClass("on");
+
+                            // РњС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј С‚РѕР»СЊРєРѕ С‚Рµ РІРєР»Р°РґРєРё РґР»СЏ РєРѕС‚РѕСЂС‹С… РµСЃС‚СЊ РґР°РЅРЅС‹Рµ.
+                            // Р•СЃР»Рё РІРєР»Р°РґРѕРє РЅРµСЃРєРѕР»СЊРєРѕ С‚Рѕ Р°РєС‚РёРІРЅРѕР№ РїРѕ РґРµС„РѕР»С‚Сѓ РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ dilanka, dilanka_arch, ikk, rajonunion
+                            if (data.dilanka) {
+                                $('#a_dilanka').show().addClass('on');
+
+                                $('#page_1')
+                                    .show()
+                                    .html(data.dilanka);
+
+                                if(data.dilanka_arch) {
+                                    $('#a_dilanka_arch').show();
+                                    $('#page_8').html(data.dilanka_arch);
+                                }
+
+                                if (data.ikk) {
+                                    $('#a_ikk').show();
+                                    $('#page_2').html(data.ikk);
+                                }
+
+                                if (data.rajonunion) {
+                                    $('#a_rajonunion').show();
+                                    $('#page_4').html(data.rajonunion);
+                                }
+
+                                if (data.obl) {
+                                    $('#a_obl').show();
+                                    $('#page_5').html(data.obl);
+                                }
+
+                                if(data.land_disposal) {
+                                    $('#a_land_disposal').show();
+                                    $('#page_7').html(data.land_disposal);
+                                }
+                                if (data.grunt) {
+                                $('#a_grunt').show();
+                                $('#page_6').html(data.grunt);
+                                }
+
+                            } else if (data.dilanka_arch) {
+                                $('#a_dilanka_arch').show().addClass('on');
+                                $('#page_8')
+                                    .show()
+                                    .html(data.dilanka_arch);
+                                if (data.ikk) {
+                                    $('#a_ikk').show();
+                                    $('#page_2').html(data.ikk);
+                                }
+
+                                if (data.rajonunion) {
+                                    $('#a_rajonunion').show();
+                                    $('#page_4').html(data.rajonunion);
+                                }
+
+                                if (data.obl) {
+                                    $('#a_obl').show();
+                                    $('#page_5').html(data.obl);
+                                }
+
+                                if(data.land_disposal) {
+                                    $('#a_land_disposal').show();
+                                    $('#page_7').html(data.land_disposal);
+                                }
+                                if (data.grunt) {
+                                    $('#a_grunt').show();
+                                    $('#page_6').html(data.grunt);
+                                }
+
+
+
+                            } else if (data.ikk) {
+                                $('#a_ikk').show().addClass('on');
+
+                                $('#page_2')
+                                    .show()
+                                    .html(data.ikk);
+
+                                if (data.rajonunion) {
+                                    $('#a_rajonunion').show();
+                                    $('#page_4').html(data.rajonunion);
+                                }
+
+                                if (data.obl) {
+                                    $('#a_obl').show();
+                                    $('#page_5').html(data.obl);
+                                }
+
+                                if(data.land_disposal) {
+                                    $('#a_land_disposal').show();
+                                    $('#page_7').html(data.land_disposal);
+                                }
+                                if (data.grunt) {
+                                    $('#a_grunt').show();
+                                    $('#page_6').html(data.grunt);
+                                }
+                            } else if (data.rajonunion) {
+                                $('#a_rajonunion').show().addClass('on');
+
+                                $('#page_4')
+                                    .show()
+                                    .html(data.rajonunion);
+
+                                if (data.obl) {
+                                    $('#a_obl').show();
+                                    $('#page_5').html(data.obl);
+                                }
+
+                                if(data.land_disposal) {
+                                    $('#a_land_disposal').show();
+                                    $('#page_7').html(data.land_disposal);
+                                }
+                                if (data.grunt) {
+                                    $('#a_grunt').show();
+                                    $('#page_6').html(data.grunt);
+                                }
+                            } else if (data.obl) {
+                                $('#a_obl').show().addClass('on');
+
+                                $('#page_5')
+                                    .show()
+                                    .html(data.obl);
+                                if (data.grunt) {
+                                    $('#a_grunt').show();
+                                    $('#page_6').html(data.grunt);
+                                }
+                            } else if (data.atu) {
+                                $('#a_atu').show().addClass('on');
+
+                                $('#page_3')
+                                    .show()
+                                    .html(data.atu);
+                                if (data.grunt) {
+                                    $('#a_grunt').show();
+                                    $('#page_6').html(data.grunt);
+                                }
+                            } else if (data.grunt) {
+                                $('#a_grunt').show().addClass('on');
+
+                                $('#page_6')
+                                    .show()
+                                    .html(data.grunt);
+                            }
+                            tooltip.open('tooltip', x, y);
+                            if(initTabs()){
+                                $('.map').css('cursor', 'default');
+                                statusAjax = true;
+                            }
+                        }
+                    },
+                    error: function(){
+                        alert('РџРѕРјРёР»РєР° РѕР±СЂРѕР±РєРё Р·Р°РїРёС‚Сѓ. Р’РёР±Р°С‡С‚Рµ Р·Р° РЅРµР·СЂСѓС‡РЅРѕСЃС‚С–.');
+                        $('.map').css('cursor', 'default');
+                        statusAjax = true;
+                    }
+
+                });
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
