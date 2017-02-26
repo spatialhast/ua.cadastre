@@ -1,0 +1,84 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body,
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.innerNavig {
+    background-color: #E4E4E4;
+    font-size: 14px;
+    padding: 0 5px;
+    height: 30px;
+    margin-top: 0;
+}
+
+.innerNavig UL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.innerNavig LI {
+    margin-left: 5px;
+    display: block;
+    float: left;
+    position: relative;
+    top: 3px;
+}
+
+.innerNavig a {
+    display: block;
+    padding: 3px 7px 7px;
+    margin: 0;
+    color: black;
+    cursor: pointer;
+}
+
+.innerNavig a.on {
+    background-color: #FFFFFF;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    color: #464646;
+    border-top: solid 1px #96D0FD;
+    border-left: solid 1px #96D0FD;
+    border-right: solid 1px #96D0FD;
+    border-bottom: solid 1px white !important;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+
+.page_dilanka,
+.page_ikk,
+.page_atu,
+.page_rajonunion,
+.page_obl,
+.page_grunt,
+.page_land_disposal,
+.page_dilanka_arch {
+    border: solid 1px #96D0FD;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: auto;
+    background-color: white !important;
+    padding: 5px;
+    height: 90px;
+}
+
+.info_ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
